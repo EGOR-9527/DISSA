@@ -1,103 +1,102 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
+import PAGES from "../../features/PagesRegistration/index";
 import registrationStyle from "../../css/registration.module.css";
-import PAGES from "../../features/PagesRegistration";
+import cross from "../../svg/cross.svg";
+import arrow from "../../svg/arrow.svg";
 
 const RegistrationController = () => {
-  const [offset, setOffset] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [pageWidth, setPageWidth] = useState(0);
-
+  const [pageWidth, setPageWidth] = useState(window.innerWidth);
   const pagesLength = Object.keys(PAGES).length;
 
-  useEffect(() => {
-    const initialWidth = window.innerWidth;
-    setPageWidth(initialWidth);
-    setOffset(-(initialWidth * currentIndex));
-  }, []);
+  const handleResize = () => {
+    setPageWidth(window.innerWidth);
+  };
 
   useEffect(() => {
-    const handleResize = () => {
-      const newWidth = window.innerWidth;
-      setPageWidth(newWidth);
-    };
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    setOffset(-(pageWidth * currentIndex)); 
-  }, [pageWidth, currentIndex]);
-
-  const handleLeftArrowClick = useCallback(() => {
+  const handleLeftArrowClick = () => {
     if (currentIndex > 0) {
-      setCurrentIndex((prev) => prev - 1);
+      setCurrentIndex((prevIndex) => prevIndex - 1);
     }
-  }, [currentIndex]);
+  };
 
-  const handleRightArrowClick = useCallback(() => {
+  const handleRightArrowClick = () => {
     if (currentIndex < pagesLength - 1) {
-      setCurrentIndex((prev) => prev + 1);
+      setCurrentIndex((prevIndex) => prevIndex + 1);
     }
-  }, [currentIndex, pagesLength]);
+  };
 
   return (
-    <div className={registrationStyle.containerRegistrationController}>
+    <div className={registrationStyle.mainContainer}>
       <div className={registrationStyle.window}>
         <div
           className={registrationStyle.allPagesContainer}
-          style={{ transform: `translateX(${offset}px)` }}
+          style={{
+            transform: `translateX(${-pageWidth * currentIndex}px)`,
+            transition: "transform 0.3s ease",
+          }}
         >
-          {Object.entries(PAGES).map(([key, PageComponent]) => (
-            <div key={key} className={registrationStyle.pageWrapper}>
+          {Object.values(PAGES).map((PageComponent, index) => (
+            <div key={index} className={registrationStyle.page}>
               <PageComponent />
             </div>
           ))}
         </div>
-
-        <div className={registrationStyle.containerButton}>
-          {currentIndex > 0 && (
-            <button
-              className={registrationStyle.exitButton}
-              onClick={handleLeftArrowClick}
-            >
-              Назад
-            </button>
-          )}
-
-          {currentIndex === 0 && (
-            <div className={registrationStyle.blockButton}>
-              <button
-                className={registrationStyle.registrationButton}
-                onClick={handleRightArrowClick}
-              >
-                Регистрация
-              </button>
-              <p className={registrationStyle.problemsLoggingIn}>
-                Проблемы со входом?
-              </p>
-            </div>
-          )}
-
-          {currentIndex === 1 && (
-            <button
-              className={registrationStyle.enterButton}
-              onClick={handleRightArrowClick}
-            >
-              Принять
-            </button>
-          )}
-
-          {currentIndex > 2 && currentIndex < pagesLength - 1 && (
-            <button
-              className={registrationStyle.enterButton}
-              onClick={handleRightArrowClick}
-            >
-              Далее
-            </button>
-          )}
-        </div>
       </div>
+
+      {currentIndex === 0 && (
+        <div className={registrationStyle.blockButton}>
+          <button
+            className={registrationStyle.registrationButton}
+            onClick={handleRightArrowClick}
+          >
+            Регистрация
+          </button>
+          <p className={registrationStyle.problemsLoggingIn}>
+            Проблемы со входом?
+          </p>
+        </div>
+      )}
+
+      {currentIndex === 1 && (
+        <button
+          className={registrationStyle.enterButton}
+          onClick={handleRightArrowClick}
+        >
+          Принять
+        </button>
+      )}
+
+      {currentIndex > 1 && currentIndex < pagesLength - 1 && (
+        <button
+          className={registrationStyle.enterButton}
+          onClick={handleRightArrowClick}
+        >
+          Далее
+        </button>
+      )}
+
+      {currentIndex > 1 && (
+        <img
+          className={registrationStyle.exitButton}
+          onClick={handleLeftArrowClick}
+          src={arrow}
+          alt="Крестик"
+        />
+      )}
+
+      {currentIndex === 1 && (
+        <img
+          className={registrationStyle.exitButton}
+          onClick={handleLeftArrowClick}
+          src={cross}
+          alt="Крестик"
+        />
+      )}
     </div>
   );
 };
