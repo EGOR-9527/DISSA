@@ -1,0 +1,237 @@
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat.ttf");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Candara";
+  src: url("../fonts/Candara.ttf");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter.ttf");
+  font-style: normal;
+}
+
+:root {
+  /* Цвета */
+  --mainColorRegistration: #ededed;
+  --mainTextColor: #d9d7d7;
+  --textDark: #373737;
+  --registrationGradient: linear-gradient(
+    180deg,
+    #c65ef6 0%,
+    #aa3bff 50%,
+    #9333dd 73%,
+    #b377e0 100%
+  );
+  --buttonHoverGradient: linear-gradient(90deg, #e14ce4 0%, #55007d 100%);
+  --white: #ffffff;
+
+  /* Шрифты */
+  --fontMontserrat: "Montserrat", sans-serif;
+  --fontCandara: "Candara", sans-serif;
+  --fontInter: "Inter", sans-serif;
+
+  /* Размеры и отступы */
+  --font-size-base: clamp(12px, 2vw, 14px);
+  --font-size-heading: clamp(24px, 5vw, 48px);
+  --logo-width: clamp(40px, 7vw, 55px);
+  --logo-height: clamp(60px, 10vw, 79px);
+  --content-width: clamp(70vw, 80vw, 90vw);
+  --button-width: clamp(40vw, 70vw, 90vw);
+  --button-height: clamp(8vw, 10vw, 12vw);
+  --button-radius: min(5.18135vw, 4.31965vh);
+
+  /* Прочее */
+  --text-line-height: 1.8;
+  --letter-spacing-default: 2px;
+  --transition-fast: 0.3s;
+  --transition-smooth: 0.5s ease-in-out;
+  --shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+  --margin-top-vw: 15vw;
+  --margin-top-header: -50vw;
+  --font-weight-boldest: 1000;
+}
+
+.window {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.allPagesContainer {
+  display: flex;
+  transition: var(--transition-smooth);
+  will-change: transform;
+}
+
+.pageWrapper {
+  flex-shrink: 0;
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.registration {
+  background: var(--registrationGradient);
+}
+
+.containerRegistrationController {
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.registrationButton {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--button-width);
+  height: var(--button-height);
+  background-color: var(--mainColorRegistration);
+  border-radius: var(--button-radius);
+  border: none;
+  font-size: var(--font-size-base);
+  font-weight: bold;
+  color: var(--textDark);
+  box-shadow: var(--shadow);
+  transition: color var(--transition-fast);
+  z-index: 0;
+  overflow: hidden;
+  font-family: var(--fontMontserrat);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+.registrationButton::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--buttonHoverGradient);
+  opacity: 0;
+  transition: opacity var(--transition-smooth);
+  z-index: -1;
+}
+
+.registrationButton:hover::before {
+  opacity: 1;
+}
+
+.registrationButton:hover {
+  color: var(--mainColorRegistration);
+}
+
+.containerButton {
+  position: absolute;
+  bottom: 80vw;
+}
+
+.problemsLoggingIn {
+  position: relative;
+  color: var(--mainColorRegistration);
+  font-family: var(--fontCandara);
+  letter-spacing: var(--letter-spacing-default);
+  top: var(--margin-top-vw);
+}
+
+.description {
+  margin-top: var(--margin-top-vw);
+  font-size: calc(5px + 7 * (100vw / 393));
+  width: var(--button-width);
+  font-family: var(--fontInter);
+  line-height: 2;
+  font-weight: var(--font-weight-boldest);
+  color: var(--mainTextColor);
+  display: flex;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.startHeader {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  font-family: var(--fontMontserrat);
+  font-weight: var(--font-weight-boldest);
+  margin-top: var(--margin-top-header);
+  font-size: min(7.77202vw, 6.47948vh);
+  color: var(--white);
+}
+
+.naming {
+  margin-left: 2vw;
+  font-size: clamp(60px, 1.5vw, 64px);
+}
+
+@media (max-height: 1380px) {
+  .containerButton {
+    bottom: 60vw;
+  }
+}
+
+@media (max-height: 1138px) {
+  .containerButton {
+    bottom: 70vw;
+  }
+}
+
+@media (max-height: 1024px) {
+  .containerButton {
+    bottom: 70vw;
+  }
+}
+
+@media (max-height: 914px) {
+  .containerButton {
+    bottom: 86vw;
+  }
+}
+
+@media (max-height: 882px) {
+  .containerButton {
+    bottom: 100vw;
+  }
+}
+
+@media (max-height: 800px) {
+  .containerButton {
+    bottom: 70vw;
+  }
+}
+
+@media (max-width: 732px) {
+  .description {
+    font-size: calc(5px + 7 * ((100vw - 320px) / 393));
+  }
+}
+
+@media (max-height: 732px) {
+
+  .containerButton {
+    bottom: 56vw;
+  }
+}
+
+@media (max-height: 658px) {
+  .containerButton {
+    bottom: 70vw;
+  }
+}
+
+@media (max-height: 640px) {
+  .containerButton {
+    bottom: 60vw;
+  }
+}
