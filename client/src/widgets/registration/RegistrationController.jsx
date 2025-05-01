@@ -9,14 +9,12 @@ const RegistrationController = () => {
 
   const pagesLength = Object.keys(PAGES).length;
 
-  // Устанавливаем ширину при монтировании
   useEffect(() => {
     const initialWidth = window.innerWidth;
     setPageWidth(initialWidth);
     setOffset(-(initialWidth * currentIndex));
-  }, []); // тут только при монтировании, так что зависимости пустые
+  }, []);
 
-  // Обработка ресайза
   useEffect(() => {
     const handleResize = () => {
       const newWidth = window.innerWidth;
@@ -25,12 +23,11 @@ const RegistrationController = () => {
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []); // только при монтировании, так что зависимости пустые
+  }, []);
 
-  // Обновляем смещение при изменении индекса или ширины
   useEffect(() => {
-    setOffset(-(pageWidth * currentIndex)); // важно добавить currentIndex в зависимости
-  }, [pageWidth, currentIndex]); // теперь зависимости обновлены
+    setOffset(-(pageWidth * currentIndex)); 
+  }, [pageWidth, currentIndex]);
 
   const handleLeftArrowClick = useCallback(() => {
     if (currentIndex > 0) {
