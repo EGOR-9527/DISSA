@@ -551,3 +551,49 @@
   font-weight: 100;
   text-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
 }
+
+.describeYoursel {
+  margin-top: 30vw;
+  margin-left: -6vw;
+}
+
+.describeYoursel > textarea {
+  margin-top: 25.26108vh;
+  width: 92.24599vw;
+  height: 34.75936vw;
+  border-radius: min(7.21925vw, 3.32512vh);
+  border: none;
+  padding-left: 5vw;
+  padding-bottom: 20vw;
+}
+
+.describeYoursel > textarea::placeholder {
+  color: black;
+  font-size: min(4.81283vw, 2.21675vh);
+  line-height: 25px;
+  letter-spacing: 0.12em;
+}
+
+.describeYoursel > h2 {
+  position: absolute;
+  margin-top: 25vw;
+  font-size: min(8.02139vw, 3.69458vh);
+  font-weight: 900;
+  text-shadow: var(--shadow);
+  text-align: start;
+  width: 100%;
+  color: var(--white);
+  font-family: var(--fontMontserrat);
+}
+
+.textarea {
+  width: 100%;
+  height: 100px;
+  resize: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  user-select: none;
+  caret-color: transparent;
+}
