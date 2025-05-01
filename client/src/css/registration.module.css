@@ -13,6 +13,11 @@
   src: url("../fonts/Inter.ttf");
 }
 
+@font-face {
+  font-family: "OpenSans";
+  src: url("../fonts/OpenSans.ttf");
+}
+
 :root {
   /* Цвета */
   --mainColorRegistration: #ededed;
@@ -32,6 +37,7 @@
   --fontMontserrat: "Montserrat", sans-serif;
   --fontCandara: "Candara", sans-serif;
   --fontInter: "Inter", sans-serif;
+  --fontOpenSans: "OpenSans", sans-serif;
 
   /* Размеры текста */
   --font-size-description: min(3.20856vw, 2.47783vh);
@@ -390,7 +396,7 @@
   background-image: url("../svg/downArrow.svg");
   background-repeat: no-repeat;
   padding-left: 10vw;
-  background-position:5vw 4.5vw;
+  background-position: 5vw 4.5vw;
   background-size: 4.27807vw 4.27807vw;
   cursor: pointer;
   flex-direction: column;
@@ -457,6 +463,21 @@
   text-shadow: var(--shadow);
 }
 
+.noneActiveAll {
+  width: 0;
+  height: 0;
+  background-color: #00ac42;
+  border-radius: min(5.34759vw, 2.46305vh);
+}
+
+.activeAll {
+  transition: all 0.3s;
+  width: 6.14973vw;
+  height: 5.61497vw;
+  background-color: #00ac42;
+  border-radius: min(5.34759vw, 2.46305vh);
+}
+
 .noneActiveGirl {
   width: 0;
   height: 0;
@@ -521,4 +542,12 @@
 
 .ponel > p {
   margin-top: 0.49261vh;
+}
+
+.descriptionOfTheDelection {
+  color: var(--white);
+  font-size: min(4.27807vw, 1.97044vh);
+  font-family: var(--fontOpenSans);
+  font-weight: 100;
+  text-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
 }
