@@ -56,14 +56,14 @@ const Page4 = () => {
   };
 
   return (
-    <div className={registrationStyle.nameDateContainer}>
+    <div className={registrationStyle.dateContainer}>
       <div className={registrationStyle.logoHeader}>
         <img src={logo} alt="Логотип" />
         <p>DISSA</p>
       </div>
 
       <div className={registrationStyle.containerDate}>
-        <h2 className={registrationStyle.title}>
+        <h2 className={registrationStyle.containerDatetitle}>
           Твоя дата
           <br />
           рождения

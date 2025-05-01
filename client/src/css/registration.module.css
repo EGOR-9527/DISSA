@@ -138,7 +138,7 @@
   color: var(--textDark);
   box-shadow: var(--shadow);
   transition: color var(--transition-fast);
-  z-index:1;
+  z-index: 1;
   overflow: hidden;
   font-family: var(--fontMontserrat);
   letter-spacing: var(--letter-spacing-default);
@@ -364,7 +364,7 @@
   filter: drop-shadow(var(--shadow));
 }
 
-.title {
+.containerDatetitle {
   position: absolute;
   margin-bottom: 50vw;
   margin-right: 40vw;
@@ -407,4 +407,72 @@
   z-index: 100;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.inputGender {
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 3.74332vw;
+  margin-top: 2.46305vh;
+  width: 89.03743vw;
+  height: 12.03209vw;
+  border-radius: min(4.0107vw, 1.84729vh);
+  background-color: var(--mainColorRegistration);
+}
+
+.circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6.14973vw;
+  height: 5.61497vw;
+  background-color: var(--mainTextColor);
+  border-radius: min(5.34759vw, 2.46305vh);
+}
+
+.choosingGender {
+  margin-top: 30.94581vh;
+  margin-left: -5vw;
+}
+
+.choosingGendertitle {
+  font-size: min(8.02139vw, 3.69458vh);
+  margin-bottom: 10vw;
+  font-weight: 900;
+  color: var(--white);
+  font-family: var(--fontMontserrat);
+  text-shadow: var(--shadow);
+}
+
+.noneActiveGirl {
+  width: 0;
+  height: 0;
+  background-color: #00ac42;
+  border-radius: min(5.34759vw, 2.46305vh);
+}
+
+.activeGirl {
+  transition: all 0.3s;
+  width: 6.14973vw;
+  height: 5.61497vw;
+  background-color: #00ac42;
+  border-radius: min(5.34759vw, 2.46305vh);
+}
+
+
+.noneActiveBoy {
+  width: 0;
+  height: 0;
+  background-color: #00ac42;
+  border-radius: min(5.34759vw, 2.46305vh);
+}
+
+.activeBoy {
+  transition: all 0.3s;
+  width: 6.14973vw;
+  height: 5.61497vw;
+  background-color: #00ac42;
+  border-radius: min(5.34759vw, 2.46305vh);
 }
