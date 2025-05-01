@@ -371,11 +371,14 @@
   font-size: min(8.02139vw, 3.69458vh);
   font-weight: 900;
   text-align: center;
+  text-shadow: var(--shadow);
   color: var(--white);
   font-family: var(--fontMontserrat);
 }
 
 .dateInut {
+  font-size: min(3.74332vw, 1.72414vh);
+  font-family: var(--fontCandara);
   position: relative;
   display: flex;
   align-items: center;
@@ -384,8 +387,14 @@
   width: 24.06417vw;
   height: 12.03209vw;
   background-color: var(--mainColorRegistration);
+  background-image: url("../svg/downArrow.svg");
+  background-repeat: no-repeat;
+  padding-left: 10vw;
+  background-position:5vw 4.5vw;
+  background-size: 4.27807vw 4.27807vw;
   cursor: pointer;
   flex-direction: column;
+  box-shadow: var(--shadow);
 }
 
 .containerDate {
@@ -401,6 +410,7 @@
   background-color: var(--mainColorRegistration);
   width: 100%;
   max-height: 70vw;
+  text-align: center;
   top: 110%;
   overflow-y: auto;
   left: 0;
@@ -412,6 +422,7 @@
 .inputGender {
   box-shadow: var(--shadow);
   display: flex;
+  font-size: min(4.27807vw, 1.97044vh);
   align-items: center;
   justify-content: space-between;
   padding-inline: 3.74332vw;
@@ -461,7 +472,6 @@
   border-radius: min(5.34759vw, 2.46305vh);
 }
 
-
 .noneActiveBoy {
   width: 0;
   height: 0;
@@ -475,4 +485,40 @@
   height: 5.61497vw;
   background-color: #00ac42;
   border-radius: min(5.34759vw, 2.46305vh);
+}
+
+.searchSelectionContainer {
+  position: absolute;
+  margin-top: 20.98522vh;
+}
+
+.searchSelectionPonels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4.0107vw;
+}
+
+.ponel {
+  width: 24.07487vw;
+  height: 24.07487vw;
+  background-color: var(--mainColorRegistration);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  font-size: min(2.94118vw, 1.35468vh);
+  font-family: var(--fontCandara);
+  border-radius: min(4.0107vw, 1.84729vh);
+  box-shadow: -7px 7px 6px rgba(255, 255, 255, 0.3);
+  transition: all 0.5s;
+}
+
+.ponel:hover {
+  background-color: #a64bee;
+  color: var(--white);
+}
+
+.ponel > p {
+  margin-top: 0.49261vh;
 }
