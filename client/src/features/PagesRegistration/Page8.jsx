@@ -16,10 +16,10 @@ const Page8 = () => {
           <br />
           что-нибудь о себе
         </h2>
-        <textarea className={registrationStyle.textarea} maxLength={225} type="text" placeholder="Введите текст..." />
+        <textarea className={registrationStyle.textarea} maxLength={225} minLength={3} type="text" placeholder="Введите текст..." />
       </div>
     </div>
-  );
+  ); 
 };
 
 export default Page8;
