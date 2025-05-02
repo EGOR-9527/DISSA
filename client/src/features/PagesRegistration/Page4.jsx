@@ -70,10 +70,11 @@ const Page4 = () => {
         </h2>
 
         {/* День */}
-        <div className={registrationStyle.dateInut}>
-          <p onClick={() => setOpenDays((prev) => !prev)}>
-            {selectedDay || "ДД"}
-          </p>
+        <div
+          onClick={() => setOpenDays((prev) => !prev)}
+          className={registrationStyle.dateInut}
+        >
+          <p>{selectedDay || "ДД"}</p>
           <div className={registrationStyle.menu}>
             {openDays &&
               daysInMonth.map((d) => (
@@ -89,8 +90,11 @@ const Page4 = () => {
         </div>
 
         {/* Месяц */}
-        <div className={registrationStyle.dateInut}>
-          <p onClick={() => setOpenMonths((prev) => !prev)}>{month || "ММ"}</p>
+        <div
+          onClick={() => setOpenMonths((prev) => !prev)}
+          className={registrationStyle.dateInut}
+        >
+          <p>{month || "ММ"}</p>
           <div className={registrationStyle.menu}>
             {openMonths &&
               months.map((m) => (
@@ -106,8 +110,11 @@ const Page4 = () => {
         </div>
 
         {/* Год */}
-        <div className={registrationStyle.dateInut}>
-          <p onClick={() => setOpenYears((prev) => !prev)}>{year || "ГГГГ"}</p>
+        <div
+          onClick={() => setOpenYears((prev) => !prev)}
+          className={registrationStyle.dateInut}
+        >
+          <p>{year || "ГГГГ"}</p>
           <div className={registrationStyle.menu}>
             {openYears &&
               filteredYears.map((y) => (

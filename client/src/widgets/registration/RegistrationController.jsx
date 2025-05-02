@@ -4,7 +4,10 @@ import registrationStyle from "../../css/registration.module.css";
 import cross from "../../svg/cross.svg";
 import arrow from "../../svg/arrow.svg";
 
-const RegistrationController = () => {
+import useAboutMe from "../../shared/model/StoreAboutMe";
+import { observer } from "mobx-react-lite";
+
+const RegistrationController = observer(() => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [pageWidth, setPageWidth] = useState(window.innerWidth);
   const pagesLength = Object.keys(PAGES).length;
@@ -71,14 +74,16 @@ const RegistrationController = () => {
         </button>
       )}
 
-      {currentIndex > 1 && currentIndex < pagesLength - 1 && (
-        <button
-          className={registrationStyle.enterButton}
-          onClick={handleRightArrowClick}
-        >
-          Далее
-        </button>
-      )}
+      {currentIndex > 1 &&
+        currentIndex < pagesLength - 1 &&
+        currentIndex !== 8 && (
+          <button
+            className={registrationStyle.enterButton}
+            onClick={handleRightArrowClick}
+          >
+            Далее
+          </button>
+        )}
 
       {currentIndex > 1 && (
         <img
@@ -87,6 +92,20 @@ const RegistrationController = () => {
           src={arrow}
           alt="Крестик"
         />
+      )}
+
+      {currentIndex === 8 && (
+        <button
+          className={
+            useAboutMe.count === 4
+              ? registrationStyle.nextButtonDisabled
+              : registrationStyle.nextButton
+          }
+          onClick={handleRightArrowClick}
+          disabled={useAboutMe.count !== 4}
+        >
+          Далее {useAboutMe.count}/4
+        </button>
       )}
 
       {currentIndex === 1 && (
@@ -99,6 +118,6 @@ const RegistrationController = () => {
       )}
     </div>
   );
-};
+});
 
 export default RegistrationController;

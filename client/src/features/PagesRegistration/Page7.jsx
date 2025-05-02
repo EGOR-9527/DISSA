@@ -63,7 +63,7 @@ const Page7 = () => {
           onClick={() => choosingYourGender("all")}
           className={registrationStyle.inputGender}
         >
-          <p>Женщина</p>
+          <p>Всех</p>
           <div className={registrationStyle.circle}>
             <div
               className={
