@@ -5,6 +5,7 @@ import cross from "../../svg/cross.svg";
 import arrow from "../../svg/arrow.svg";
 
 import useAboutMe from "../../shared/model/StoreAboutMe";
+import usePhoto from "../../shared/model/StorePhoto";
 import { observer } from "mobx-react-lite";
 
 const RegistrationController = observer(() => {
@@ -105,6 +106,20 @@ const RegistrationController = observer(() => {
           disabled={useAboutMe.count !== 4}
         >
           Далее {useAboutMe.count}/4
+        </button>
+      )}
+
+      {currentIndex === 10 && (
+        <button
+          className={
+            usePhoto.count > 0
+              ? registrationStyle.nextButtonDisabled
+              : registrationStyle.nextButton
+          }
+          onClick={handleRightArrowClick}
+          disabled={useAboutMe.count > 0}
+        >
+          Далее {usePhoto.count}/1
         </button>
       )}
 
