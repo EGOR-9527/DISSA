@@ -4,19 +4,28 @@ import "leaflet/dist/leaflet.css";
 import logo from "../../svg/logo.svg";
 import registrationStyle from "../../css/registration.module.css";
 
-const Page10 = () => {
+import { observer } from "mobx-react-lite";
+import useCollectingInformation from "../../shared/model/StoreCollectingInformation";
+
+const Page10 = observer(() => {
   const mapRef = useRef(null);
   const circleRef = useRef(null);
   const [radius, setRadius] = useState(300);
 
   useEffect(() => {
-    const map = L.map(mapRef.current).setView([55.7558, 37.6173], 10);
+    const { latitude, longitude } = useCollectingInformation.userLocation;
+    const defaultLatLng = [55.7558, 37.6173];
+    const startLatLng =
+      latitude && longitude ? [latitude, longitude] : defaultLatLng;
+
+    const map = L.map(mapRef.current).setView(startLatLng, 10);
+
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
 
-    const initialCircle = L.circle([55.7558, 37.6173], {
+    const initialCircle = L.circle(startLatLng, {
       radius: radius * 1000,
       color: "red",
       fillColor: "#f03",
@@ -27,10 +36,10 @@ const Page10 = () => {
 
     map.on("click", (e) => {
       const { lat, lng } = e.latlng;
-
       if (circleRef.current) {
         circleRef.current.setLatLng([lat, lng]);
       }
+      useCollectingInformation.setLocation({ latitude: lat, longitude: lng });
     });
 
     return () => {
@@ -66,13 +75,13 @@ const Page10 = () => {
           min="1"
           max="500"
           value={radius}
-          onChange={(e) => setRadius(e.target.value)}
+          onChange={(e) => setRadius(Number(e.target.value))}
           className={registrationStyle.rangeInput}
         />
         <span>{radius} км</span>
       </div>
     </div>
   );
-};
+});
 
 export default Page10;

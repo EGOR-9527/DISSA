@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import logo from "../../svg/logo.svg";
 import registrationStyle from "../../css/registration.module.css";
 
+import useCollectingInformation from "../../shared/model/StoreCollectingInformation";
+import { observer } from "mobx-react-lite";
+
 import hearts1 from "../../svg/hearts/hearts1.svg";
 import hearts2 from "../../svg/hearts/hearts2.svg";
 import hearts3 from "../../svg/hearts/hearts3.svg";
@@ -12,7 +15,9 @@ import hearts7 from "../../svg/hearts/hearts7.svg";
 import hearts8 from "../../svg/hearts/hearts8.svg";
 import hearts9 from "../../svg/hearts/hearts9.svg";
 
-const Page6 = () => {
+const Page6 = observer(() => {
+  const [selectedOption, setSelectedOption] = useState(null);
+
   const ponels = [
     {
       img: hearts1,
@@ -23,6 +28,7 @@ const Page6 = () => {
           партнёр
         </p>
       ),
+      value: "longTermPartner",
     },
     {
       img: hearts2,
@@ -32,6 +38,7 @@ const Page6 = () => {
           краткосрочно
         </p>
       ),
+      value: "longShortTerm",
     },
     {
       img: hearts3,
@@ -41,8 +48,9 @@ const Page6 = () => {
           <br /> повеселиться
         </p>
       ),
+      value: "justForFun",
     },
-    { img: hearts4, text: <p>Найти друзей</p> },
+    { img: hearts4, text: <p>Найти друзей</p>, value: "findFriends" },
     {
       img: hearts5,
       text: (
@@ -51,6 +59,7 @@ const Page6 = () => {
           <br /> решил(а)
         </p>
       ),
+      value: "undecided",
     },
     {
       img: hearts6,
@@ -60,6 +69,7 @@ const Page6 = () => {
           обязательств
         </p>
       ),
+      value: "noCommitment",
     },
     {
       img: hearts7,
@@ -69,6 +79,7 @@ const Page6 = () => {
           хобби / игры
         </p>
       ),
+      value: "sharedHobbies",
     },
     {
       img: hearts8,
@@ -78,6 +89,7 @@ const Page6 = () => {
           поддержка
         </p>
       ),
+      value: "mutualSupport",
     },
     {
       img: hearts9,
@@ -87,9 +99,14 @@ const Page6 = () => {
           <br /> общение
         </p>
       ),
+      value: "longTermCommunication",
     },
   ];
-  <p></p>;
+
+  const handleSelection = (value) => {
+    setSelectedOption(value);
+    useCollectingInformation.setUserInfo({ searchGoal: value });
+  };
 
   return (
     <div className={registrationStyle.choosingGenderContainer}>
@@ -101,18 +118,22 @@ const Page6 = () => {
       <div className={registrationStyle.searchSelectionContainer}>
         <h2 className={registrationStyle.choosingGendertitle}>Что ты ищешь?</h2>
         <ul className={registrationStyle.searchSelectionPonels}>
-          {ponels.map((pnl, index) => {
-            return (
-              <li className={registrationStyle.ponel} key={index}>
-                <img src={pnl.img} alt="Сердце" />
-                {pnl.text}
-              </li>
-            );
-          })}
+          {ponels.map((pnl, index) => (
+            <li
+              key={index}
+              className={`${registrationStyle.ponel} ${
+                selectedOption === pnl.value ? registrationStyle.selected : ""
+              }`}
+              onClick={() => handleSelection(pnl.value)}
+            >
+              <img src={pnl.img} alt="Сердце" />
+              {pnl.text}
+            </li>
+          ))}
         </ul>
       </div>
     </div>
   );
-};
+});
 
 export default Page6;

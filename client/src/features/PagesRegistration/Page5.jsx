@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import logo from "../../svg/logo.svg";
 import registrationStyle from "../../css/registration.module.css";
+import useCollectingInformation from "../../shared/model/StoreCollectingInformation";
+import { observer } from "mobx-react-lite";
 
-const Page5 = () => {
-  const [gender, setGender] = useState(null); // Один стейт для пола
+const Page5 = observer(() => {
+  const [gender, setGender] = useState(null);
 
   const choosingYourGender = (chosenGender) => {
-    setGender(chosenGender); // Обновляем состояние пола
+    setGender(chosenGender);
+    useCollectingInformation.setUserInfo({ gender: chosenGender });
   };
 
   return (
@@ -57,6 +60,6 @@ const Page5 = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Page5;

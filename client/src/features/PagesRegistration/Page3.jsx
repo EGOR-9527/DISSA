@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../svg/logo.svg";
-import registrationStyle from "../../css/registration.module.css"
+import registrationStyle from "../../css/registration.module.css";
+import useCollectingInformation from "../../shared/model/StoreCollectingInformation";
+import { observer } from "mobx-react-lite";
 
-const Page3 = () => {
+const Page3 = observer(() => {
+  const [name, setName] = useState("");
+
+  const handleNameChange = (e) => {
+    const newName = e.target.value;
+    setName(newName);
+    useCollectingInformation.setUserInfo({ name: newName });
+  };
+
   return (
     <div className={registrationStyle.nameFormContainer}>
       <div className={registrationStyle.logoHeader}>
@@ -12,10 +22,16 @@ const Page3 = () => {
 
       <div className={registrationStyle.nameInputBlock}>
         <h1>Как тебя зовут?</h1>
-        <input maxLength={10} type="text" placeholder="Введите текст..." />
+        <input
+          value={name}
+          onChange={handleNameChange}
+          maxLength={10}
+          type="text"
+          placeholder="Введите текст..."
+        />
       </div>
     </div>
   );
-};
+});
 
 export default Page3;

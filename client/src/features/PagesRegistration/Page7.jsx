@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import logo from "../../svg/logo.svg";
 import registrationStyle from "../../css/registration.module.css";
 
+import { observer } from "mobx-react-lite";
+import useCollectingInformation from "../../shared/model/StoreCollectingInformation";
+
 const Page7 = () => {
   const [gender, setGender] = useState(null);
 
   const choosingYourGender = (chosenGender) => {
+    useCollectingInformation.setUserInfo({ gender: chosenGender });
     setGender(chosenGender);
   };
 
@@ -79,4 +83,4 @@ const Page7 = () => {
   );
 };
 
-export default Page7;
+export default observer(Page7);

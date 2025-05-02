@@ -1,25 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { observer } from "mobx-react-lite";
 import registrationStyle from "../../css/registration.module.css";
 import logo from "../../svg/logo.svg";
-import photoStore from "../../shared/model/StorePhoto";
+import useCollectingInformation from "../../shared/model/StoreCollectingInformation";
 
-const Page11 = () => {
-  const [photos, setPhotos] = useState([]);
+const Page11 = observer(() => {
+  const photos = useCollectingInformation.userPhotos;
 
   const handlePhotoUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setPhotos((prev) => [...prev, URL.createObjectURL(file)]);
+      useCollectingInformation.addPhoto(file);
     }
   };
 
   const removePhoto = (index) => {
-    setPhotos((prev) => prev.filter((_, i) => i !== index));
+    useCollectingInformation.removePhoto(index);
   };
-
-  useEffect(() => {
-    photoStore.setCount(photos.length);
-  }, [photos]);
 
   return (
     <div className={registrationStyle.habitsContainer}>
@@ -38,7 +35,10 @@ const Page11 = () => {
           <div key={index} className={registrationStyle.photoSlot}>
             {photos[index] ? (
               <div className={registrationStyle.photoPreview}>
-                <img src={photos[index]} alt={`Фото ${index + 1}`} />
+                <img
+                  src={URL.createObjectURL(photos[index])}
+                  alt={`Фото ${index + 1}`}
+                />
                 <button
                   className={registrationStyle.removeBtn}
                   onClick={() => removePhoto(index)}
@@ -62,6 +62,6 @@ const Page11 = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Page11;

@@ -8,6 +8,9 @@ import useAboutMe from "../../shared/model/StoreAboutMe";
 import usePhoto from "../../shared/model/StorePhoto";
 import { observer } from "mobx-react-lite";
 
+import useCollectingInformation from "../../shared/model/StoreCollectingInformation";
+import { api } from "../../shared/api/api";
+
 const RegistrationController = observer(() => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [pageWidth, setPageWidth] = useState(window.innerWidth);
@@ -25,6 +28,12 @@ const RegistrationController = observer(() => {
   const handleLeftArrowClick = () => {
     if (currentIndex > 0) {
       setCurrentIndex((prevIndex) => prevIndex - 1);
+    }
+  };
+
+  const sending = async () => {
+    if (useCollectingInformation.isUserInfoComplete()) {
+      await api.register(useCollectingInformation.user);
     }
   };
 
@@ -116,7 +125,7 @@ const RegistrationController = observer(() => {
               ? registrationStyle.nextButtonDisabled
               : registrationStyle.nextButton
           }
-          onClick={handleRightArrowClick}
+          onClick={sending}
           disabled={useAboutMe.count > 0}
         >
           Далее {usePhoto.count}/1

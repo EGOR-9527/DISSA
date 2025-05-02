@@ -9,6 +9,7 @@ import wine from "../../svg/hobit/wine.svg";
 
 import useAboutMe from "../../shared/model/StoreAboutMe";
 import { observer } from "mobx-react-lite";
+import useCollectingInformation from "../../shared/model/StoreCollectingInformation";
 import clsx from "clsx";
 
 const categories = [
@@ -50,6 +51,7 @@ const categories = [
 
 const Page9 = observer(() => {
   const handleClick = (category, option) => {
+    useCollectingInformation.setUserInfo({preferences: option})
     useAboutMe.toggleOption(category, option);
   };
 

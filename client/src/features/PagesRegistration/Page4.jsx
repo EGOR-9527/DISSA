@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import logo from "../../svg/logo.svg";
 import registrationStyle from "../../css/registration.module.css";
+import useCollectingInformation from "../../shared/model/StoreCollectingInformation";
+import { observer } from "mobx-react-lite";
 
 const months = Array.from({ length: 12 }, (_, i) => i + 1);
 const years = Array.from(
@@ -8,26 +10,22 @@ const years = Array.from(
   (_, i) => new Date().getFullYear() - i
 );
 
-const Page4 = () => {
+const Page4 = observer(() => {
   const [day, setDay] = useState(30);
   const [month, setMonth] = useState(null);
   const [year, setYear] = useState(null);
-
   const [selectedDay, setSelectedDay] = useState(null);
-
   const [daysInMonth, setDaysInMonth] = useState(
     Array.from({ length: 30 }, (_, i) => i + 1)
   );
-
   const [openDays, setOpenDays] = useState(false);
   const [openMonths, setOpenMonths] = useState(false);
   const [openYears, setOpenYears] = useState(false);
-
-  const [filteredYears, serFilteredYears] = useState([]);
+  const [filteredYears, setFilteredYears] = useState([]);
 
   useEffect(() => {
     const newYear = new Date().getFullYear();
-    serFilteredYears(years.filter((y) => newYear - y >= 16));
+    setFilteredYears(years.filter((y) => newYear - y >= 16));
   }, []);
 
   useEffect(() => {
@@ -38,6 +36,23 @@ const Page4 = () => {
       if (day > days) setDay(null);
     }
   }, [month, year]);
+
+  useEffect(() => {
+    if (day && month && year) {
+      const birthDate = new Date(year, month - 1, day);
+      const currentDate = new Date();
+      const calculatedAge = currentDate.getFullYear() - birthDate.getFullYear();
+      const monthDifference = currentDate.getMonth() - birthDate.getMonth();
+      if (
+        monthDifference < 0 ||
+        (monthDifference === 0 && currentDate.getDate() < birthDate.getDate())
+      ) {
+        useCollectingInformation.setUserInfo({ age: calculatedAge - 1 });
+      } else {
+        useCollectingInformation.setUserInfo({ age: calculatedAge });
+      }
+    }
+  }, [day, month, year]);
 
   const handleDaySelect = (d) => {
     setDay(d);
@@ -69,7 +84,6 @@ const Page4 = () => {
           рождения
         </h2>
 
-        {/* День */}
         <div
           onClick={() => setOpenDays((prev) => !prev)}
           className={registrationStyle.dateInut}
@@ -89,7 +103,6 @@ const Page4 = () => {
           </div>
         </div>
 
-        {/* Месяц */}
         <div
           onClick={() => setOpenMonths((prev) => !prev)}
           className={registrationStyle.dateInut}
@@ -109,7 +122,6 @@ const Page4 = () => {
           </div>
         </div>
 
-        {/* Год */}
         <div
           onClick={() => setOpenYears((prev) => !prev)}
           className={registrationStyle.dateInut}
@@ -131,6 +143,6 @@ const Page4 = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Page4;
